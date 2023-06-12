@@ -17,3 +17,7 @@ Route::get('/', function () {
     return view('pages.home.detail');
 });
 
+Route::get("grafik-pbl",function () {
+    return view('pages.grafikpbl.detail');
+});
+

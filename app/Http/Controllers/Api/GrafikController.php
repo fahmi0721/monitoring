@@ -18,7 +18,7 @@ class GrafikController extends Controller
     {
         $result = array();
         try {
-            $peirode = DB::table("t_data_pbl")->select("periode","keterangan")->get();
+            $peirode = DB::table("t_data_pbl")->where(DB::raw("RIGHT(periode,4)"), date("Y"))->select("periode","keterangan")->get();
             $laba_rugi = $this->get_data_lr($peirode);
             $beban = $this->get_data_beban($peirode);
             $pendapatan = $this->get_data_pendapatan($peirode);
@@ -38,7 +38,7 @@ class GrafikController extends Controller
 
     private function get_data_lr($peirode){
         $res = array();
-        $laba_rugi = DB::table("v_laba_rugi")->select("periode","jumlah")->get();
+        $laba_rugi = DB::table("v_laba_rugi")->where(DB::raw("RIGHT(periode,4)"), date("Y"))->select("periode","jumlah")->get();
         foreach ($peirode as $i => $value) {
             if($value->periode == $laba_rugi[$i]->periode){
                 $res[] = $laba_rugi[$i]->jumlah;
@@ -49,7 +49,7 @@ class GrafikController extends Controller
 
     private function get_data_beban($peirode){
         $res = array();
-        $beban = DB::table("v_beban")->select(DB::raw("SUM(jumlah) AS jumlah"),"periode")->groupBy("periode")->orderBy("periode")->get();
+        $beban = DB::table("v_beban")->where(DB::raw("RIGHT(periode,4)"), date("Y"))->select(DB::raw("SUM(jumlah) AS jumlah"),"periode")->groupBy("periode")->orderBy("periode")->get();
         foreach ($peirode as $i => $value) {
             if($value->periode == $beban[$i]->periode){
                 $res[] = $beban[$i]->jumlah;
@@ -60,7 +60,7 @@ class GrafikController extends Controller
 
     private function get_data_pendapatan($peirode){
         $res = array();
-        $pendapatan = DB::table("v_pendapatan")->select(DB::raw("SUM(jumlah) AS jumlah"),"periode")->groupBy("periode")->orderBy("periode")->get();
+        $pendapatan = DB::table("v_pendapatan")->where(DB::raw("RIGHT(periode,4)"), date("Y"))->select(DB::raw("SUM(jumlah) AS jumlah"),"periode")->groupBy("periode")->orderBy("periode")->get();
         foreach ($peirode as $i => $value) {
             if($value->periode == $pendapatan[$i]->periode){
                 $res[] = $pendapatan[$i]->jumlah;
