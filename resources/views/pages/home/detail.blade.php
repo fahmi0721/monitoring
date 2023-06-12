@@ -62,37 +62,12 @@
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-6 col-sm-6 col-xs-12">
-        <div class="box box-success">
-            <div class="box-header with-border">
-                <h2 class="box-title text-center"><i class='fa fa-bar-chart text-success'></i> Performance Pendapatan</h2>
-            </div>
-            <div class="box-body">
-                <canvas id="pendapatanbar" style="min-height:200px"></canvas>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-6 col-sm-6 col-xs-12">
-        <div class="box box-info">
-            <div class="box-header with-border">
-                <h2 class="box-title text-center"><i class='fa fa-bar-chart text-info'></i> Performance Biaya</h2>
-            </div>
-            <div class="box-body">
-                <div class="chart">
-                    <canvas id="bebanbar" style="min-height:200px"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="box box-info">
             <div class="box-header with-border">
-                <h2 class="box-title text-center"><i class='fa fa-line-chart text-info'></i> Performance Laba Rugi</h2>
+                <h2 class="box-title text-center"><i class='fa fa-line-chart text-info'></i> Performance PBL</h2>
             </div>
             <div class="box-body">
                 <div class="chart">
@@ -108,37 +83,48 @@
 @section('script')
 <script>
     $(document).ready(function(){
-        getLabaRugi();
-        getPendapatan();
-        getBiaya();
+        getPbl();
     })
-    function getLabaRugi(){
+    function getPbl(){
         $.ajax({
             type : "GET",
             dataType: "json",
-            url : "{{ asset('api/labarugi') }}",
+            url : "{{ asset('api/grafikpbl') }}",
             cache: false,
             success: function(res){
                 var iData = res.data;
-                const jml = [];
-                const ket = [];
-                for(var i=0; i<iData.length; i++){
-                    ket[i] = iData[i].keterangan; 
-                    jml[i] = iData[i].jumlah; 
-                }
-
                 const ctx = document.getElementById('revenue-chart');
                 const data = {
-                    labels: ket,
+                    labels: iData.labels,
                     datasets: [
                         {
                         label: 'Laba Rugi',
-                        data: jml,
-                        borderColor: "#34ace0",
-                        backgroundColor: "rgba(52, 172, 224,0.5)",
+                        data: iData.laba_rugi,
+                        borderColor: "#2ecc71",
+                        backgroundColor: "rgba(46, 204, 113,0.8)",
                         pointStyle: 'rectRounded',
-                        pointRadius: 8,
-                        pointHoverRadius: 10
+                        pointRadius: 6,
+                        pointHoverRadius: 8
+                        },
+
+                        {
+                        label: 'Pendapatan',
+                        data: iData.pendapatan,
+                        borderColor: "#3498db",
+                        backgroundColor: "rgba(52, 152, 219,0.8)",
+                        pointStyle: 'rectRounded',
+                        pointRadius: 6,
+                        pointHoverRadius: 8
+                        },
+
+                        {
+                        label: 'Beban',
+                        data: iData.beban,
+                        borderColor: "#e67e22",
+                        backgroundColor: "rgba(230, 126, 34,0.8)",
+                        pointStyle: 'rectRounded',
+                        pointRadius: 6,
+                        pointHoverRadius: 8
                         }
                     ]
                 };
@@ -150,7 +136,7 @@
                         plugins: {
                         title: {
                             display: true,
-                            text: (ctx) => 'Grafik Laba Rugi (Juta)',
+                            text: (ctx) => 'Grafik PBL',
                         }
                         }
                     }
