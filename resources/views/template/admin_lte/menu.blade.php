@@ -21,7 +21,7 @@
         <li class="header">MAIN NAVIGATION</li>
         <li><a href="{{ url('/') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
         <li class="header">KEUANGAN</li>
-        <li><a href="{{ url('/grafik-pbl') }}"><i class="fa fa-area-chart"></i> <span>Garfik PBL</span></a></li>
+        <li><a href="{{ url('/grafik-pbl/') }}/{{ date('Y') }}"><i class="fa fa-area-chart"></i> <span>Garfik PBL</span></a></li>
         @if(auth()->check())
 
         @php $menu = json_decode(Session::get("menu_user"),true); @endphp

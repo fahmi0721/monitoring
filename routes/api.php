@@ -6,6 +6,7 @@ use  App\Http\Controllers\Api\LabaRugiController;
 use  App\Http\Controllers\Api\PendapatanController;
 use  App\Http\Controllers\Api\BebanController;
 use  App\Http\Controllers\Api\GrafikController;
+use  App\Http\Controllers\Api\GrafikPblController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +30,4 @@ Route::resources([
 ]);
 
 Route::get("/grafik",[GrafikController::class, "index"]);
+Route::post("/grafikpbl",[GrafikPblController::class, "index"]);

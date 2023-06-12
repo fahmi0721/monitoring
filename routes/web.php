@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('pages.home.detail');
 });
 
-Route::get("grafik-pbl",function () {
+Route::get("grafik-pbl/{tahun}",function () {
     return view('pages.grafikpbl.detail');
 });
 
