@@ -65,7 +65,7 @@
 
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="box box-info">
+        <div class="box box-success">
             <div class="box-header with-border">
                 <h2 class="box-title text-center"><i class='fa fa-line-chart text-info'></i> Performance PBL</h2>
             </div>
