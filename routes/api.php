@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\Api\LabaRugiController;
 use  App\Http\Controllers\Api\PendapatanController;
 use  App\Http\Controllers\Api\BebanController;
+use  App\Http\Controllers\Api\GrafikController;
+use  App\Http\Controllers\Api\GrafikPblController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +28,6 @@ Route::resources([
     'pendapatan'=> PendapatanController::class,
     'beban'=> BebanController::class,
 ]);
+
+Route::get("/grafik",[GrafikController::class, "index"]);
+Route::post("/grafikpbl",[GrafikPblController::class, "index"]);
