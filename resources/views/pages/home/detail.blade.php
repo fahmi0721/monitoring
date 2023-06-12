@@ -89,7 +89,7 @@
         $.ajax({
             type : "GET",
             dataType: "json",
-            url : "{{ asset('api/grafikpbl') }}",
+            url : "{{ asset('api/grafik') }}",
             cache: false,
             success: function(res){
                 var iData = res.data;
@@ -148,122 +148,5 @@
             }
         })
     }
-
-    function getPendapatan(){
-        $.ajax({
-            type : "GET",
-            dataType: "json",
-            url : "{{ asset('api/pendapatan') }}",
-            cache: false,
-            success: function(res){
-                console.log(res);
-                const ctx = document.getElementById('pendapatanbar');
-                const labels = ["Januari","Februari","Maret","April"];
-                const data = {
-                    labels: labels,
-                    datasets: [
-                        {
-                        label: 'Pendapatan Penyedia Jasa Pengamanan',
-                        data: [18785,39374,60097,80895],
-                        borderColor: "#ff7f50",
-                        backgroundColor: "rgba(255, 127, 80,0.8)",
-                        },
-                        {
-                        label: 'Pendapatan Penyedia Cleaning Service',
-                        data: [1669,3682,6103,9656],
-                        borderColor: "#34ace0",
-                        backgroundColor: "rgba(52, 172, 224,0.8)",
-                        }
-                    ]
-                };
-
-                const config = {
-                    type: 'bar',
-                    data: data,
-                    options: {
-                        responsive: true,
-                        plugins: {
-                        legend: {
-                            position: 'top',
-                        },
-                        title: {
-                            display: true,
-                            text: 'Grafik Pendapatan (Juta)'
-                        }
-                        }
-                    },
-                };
-                new Chart(ctx, config);
-            },
-            error: function(er){
-                console.log(er);
-            }
-        })
-    }
-
-    function getBiaya(){
-        $.ajax({
-            type : "GET",
-            dataType: "json",
-            url : "{{ asset('api/beban') }}",
-            cache: false,
-            success: function(res){
-                console.log(res);
-                const ctx = document.getElementById('bebanbar');
-                const labels = ["Januari","Februari","Maret","April"];
-                const data = {
-                    labels: labels,
-                    datasets: [
-                        {
-                        label: 'Beban Penghasilan',
-                        data: [2173,4619,68715,98929],
-                        borderColor: "#eb4d4b",
-                        backgroundColor: "rgba(235, 77, 75,0.8)",
-                        },
-                        {
-                        label: 'Beban Bahan',
-                        data: [1264,2304,36446,12606],
-                        borderColor: "#34ace0",
-                        backgroundColor: "rgba(52, 172, 224,0.8)",
-                        }
-                    ]
-                };
-
-                const config = {
-                    type: 'bar',
-                    data: data,
-                    options: {
-                        responsive: true,
-                        plugins: {
-                            legend: {
-                                position: 'top',
-                            },
-                            title: {
-                                display: true,
-                                text: 'Grafik Pendapatan (Juta)'
-                            }
-                        },
-                        indexAxis: 'y',
-                        elements: {
-                            bar: {
-                                borderWidth: 2,
-                            }
-                        },
-                        
-                    },
-                };
-                new Chart(ctx, config);
-            },
-            error: function(er){
-                console.log(er);
-            }
-        })
-    }
-
-    
-   
-    
-    
-    
 </script>
 @endsection

@@ -28,4 +28,4 @@ Route::resources([
     'beban'=> BebanController::class,
 ]);
 
-Route::get("/grafikpbl",[GrafikController::class, "index"]);
+Route::get("/grafik",[GrafikController::class, "index"]);
