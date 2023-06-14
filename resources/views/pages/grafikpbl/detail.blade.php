@@ -220,7 +220,7 @@
                 },
                 title: {
                     display: true,
-                    text: 'Grafik Pendapatan'
+                    text: 'Grafik Biaya'
                 }
                 }
             },
