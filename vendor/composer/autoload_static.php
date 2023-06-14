@@ -494,6 +494,10 @@ class ComposerStaticInitff6fed93b12e64e002748c9047840f38
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\Api\\BebanController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/BebanController.php',
+        'App\\Http\\Controllers\\Api\\GrafikController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/GrafikController.php',
+        'App\\Http\\Controllers\\Api\\GrafikPblController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/GrafikPblController.php',
+        'App\\Http\\Controllers\\Api\\PendapatanController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/PendapatanController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
