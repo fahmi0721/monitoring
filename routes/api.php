@@ -32,4 +32,5 @@ Route::resources([
 
 Route::get("/grafik",[GrafikController::class, "index"]);
 Route::post("/grafikpbl",[GrafikPblController::class, "index"]);
-Route::GET("/aruskas",[ArusKasController::class, "index"]);
+Route::get("/aruskas",[ArusKasController::class, "index"]);
+Route::post("/grafikaruskas",[ArusKasController::class, "get_grafik"]);

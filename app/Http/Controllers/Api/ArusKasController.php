@@ -50,4 +50,64 @@ class ArusKasController extends Controller
         }
         return $iData;
     }
+
+    public function get_grafik(Request $requst){
+        $tahun = $requst->tahun;
+        try {
+            $result = array();
+            $result['saldo_awal'] = $this->get_data_grafik_saldo_awal($tahun);
+            $result['penerimaan'] = $this->get_data_grafik_arus_kas("penerimaan",$tahun);
+            $result['pengeluaran'] = $this->get_data_grafik_arus_kas("pengeluaran",$tahun);
+            return response()->json(['status'=>1,'messages'=>'success', "data" => $result], 200);
+        } catch (QueryException $e) {
+            return response()->json(['status'=>0,'messages'=> $e->getMessage(), "data"=>array() ], 500);
+        }
+    }
+    
+    public function get_data_grafik_arus_kas($kategori,$tahun){
+        $result = array();
+        $dt = array();
+        $result['dataset']['labelkode'] = array();
+        $periodes = DB::table("t_periode_sumber_arus_kas")->where(DB::raw("RIGHT(periode,4)"), $tahun)->select("periode","keterangan")->get();
+        foreach ($periodes as $key => $periode) {
+            $dt['labels'][] = $periode->keterangan;
+            $dt_datas = DB::table("v_detail_arus_kas")->where("periode", $periode->periode)->select($kategori,"nama_arus_kas","arus_kas_kode")->get();
+            foreach ($dt_datas as $i => $val) {
+                $result['dataset']['data'][$val->arus_kas_kode][] = $val->$kategori;
+                if(!in_array($val->arus_kas_kode, $result['dataset']['labelkode'])){
+                    $result['dataset']['label'][] = $val->nama_arus_kas;
+                    $result['dataset']['labelkode'][] = $val->arus_kas_kode;
+                    $result['dataset']['color'][] = $this->rndRGBColorCode();
+                }
+            }
+        }
+        $dt['dt_set'] = $this->generate_dataset($result['dataset']);
+        return $dt;
+    }
+
+    private function generate_dataset($dataset){
+        $res = array();
+        foreach ($dataset['labelkode'] as $key => $r) {
+            $res[$key]['label'] = $dataset['label'][$key];
+            $res[$key]['data'] = $dataset['data'][$r];
+            $res[$key]['borderColor'] = $dataset['color'][$key];
+            $res[$key]['backgroundColor'] = $dataset['color'][$key];
+        }
+        return $res;
+    }
+
+    public function get_data_grafik_saldo_awal($tahun){
+        $result = array();
+        try {
+            $query = DB::table("t_periode_sumber_arus_kas")->where(DB::raw("RIGHT(periode,4)"), $tahun)->select("keterangan","saldo_awal")->get();
+            foreach ($query as $key => $dt) {
+                $result['labels'][] = $dt->keterangan;
+                $result['data'][] = $dt->saldo_awal;
+            }
+            return $result;
+        } catch (QueryException $e) {
+            return response()->json(['status'=>0,'messages'=> $e->getMessage(), "data"=>array() ], 500);
+
+        }
+    }
 }
