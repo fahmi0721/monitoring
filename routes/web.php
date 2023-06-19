@@ -21,3 +21,7 @@ Route::get("grafik-pbl/{tahun}",function () {
     return view('pages.grafikpbl.detail');
 });
 
+Route::get("grafik-arus-kas/{tahun}",function () {
+    return view('pages.grafikaruskas.detail');
+});
+

@@ -19,10 +19,11 @@
       
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
-        <li><a href="{{ url('/') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+        <li class="{{ Request::segment(1) == '' ? 'active' : '' }}"><a href="{{ url('/') }}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
         <li class="header">KEUANGAN</li>
-        <li><a href="{{ url('/grafik-pbl/') }}/{{ date('Y') }}"><i class="fa fa-area-chart"></i> <span>Garfik PBL</span></a></li>
-        <li><a href="#"><i class="fa fa-area-chart"></i> <span>Garfik Piutang</span></a></li>
+        <li class="{{ Request::segment(1) == 'grafik-aus-kas' ? 'active' : '' }}"><a href="{{ url('/grafik-pbl/') }}/{{ date('Y') }}"><i class="fa fa-area-chart"></i> <span>Garfik PBL</span></a></li>
+        <li><a href="{{ url('/grafik-arus-kas/') }}/{{ date('Y') }}"><i class="fa fa-bar-chart"></i> <span>Garfik Arus Kas</span></a></li>
+        <li ><a href="#"><i class="fa fa-area-chart"></i> <span>Garfik Piutang</span></a></li>
         <li><a href="#"><i class="fa fa-archive"></i> <span>Data PBL</span></a></li>
         <li><a href="#"><i class="fa fa-archive"></i> <span>Data Piutang</span></a></li>
         @if(auth()->check())

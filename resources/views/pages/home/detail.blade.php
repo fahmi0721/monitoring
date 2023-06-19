@@ -78,13 +78,97 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h2 class="box-title text-center"><i class='fa fa-bar-chart text-info'></i> Performance Arus Kas Tahun {{ date("Y") }}</h2>
+            </div>
+            <div class="box-body">
+                <div class="chart">
+                    <canvas id="arus_kas" style="height: 300px;"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
     
 @endsection
 @section('script')
 <script>
     $(document).ready(function(){
         getPbl();
+        get_arus_kas();
     })
+
+    function get_arus_kas(){
+        $.ajax({
+            type : "GET",
+            dataType: "json",
+            url : "{{ asset('api/aruskas') }}",
+            cache: false,
+            success: function(res){
+                var iData = res.data;
+                console.log(iData);
+                const ctx = document.getElementById('arus_kas');
+                const data = {
+                labels: iData.labels,
+                datasets: [
+                        {
+                        label: 'Saldo Awal',
+                        data: iData.dataset.data.saldo_awal,
+                        borderColor: iData.dataset.color.saldo_awal,
+                        backgroundColor: iData.dataset.color.saldo_awal,
+                        },
+
+                        {
+                        label: 'Penerimaan',
+                        data: iData.dataset.data.penerimaan,
+                        borderColor: iData.dataset.color.penerimaan,
+                        backgroundColor: iData.dataset.color.penerimaan,
+                        },
+
+                        {
+                        label: 'Penegeluaran',
+                        data: iData.dataset.data.pengeluaran,
+                        borderColor: iData.dataset.color.pengeluaran,
+                        backgroundColor: iData.dataset.color.pengeluaran,
+                        },
+                        
+                    ]
+                };
+                const config = {
+                type: 'bar',
+                data: data,
+                options: {
+                        indexAxis: 'y',
+                        // Elements options apply to all of the options unless overridden in a dataset
+                        // In this case, we are setting the border of each horizontal bar to be 2px wide
+                        elements: {
+                        bar: {
+                            borderWidth: 2,
+                        }
+                        },
+                        responsive: true,
+                        plugins: {
+                        legend: {
+                            position: 'right',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Grafik Arus KAS'
+                        }
+                        }
+                    },
+                };
+                new Chart(ctx, config);
+            },
+            error: function(er){
+                console.log(er);
+            }
+        })
+    }
     function getPbl(){
         $.ajax({
             type : "GET",
