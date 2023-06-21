@@ -67,6 +67,5 @@ class GrafikController extends Controller
             }
         }
         return $res;
-    }
-
+   }
 }

@@ -79,7 +79,7 @@
 </div>
 
 <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="col-md-6 col-sm-6 col-xs-12">
         <div class="box box-success">
             <div class="box-header with-border">
                 <h2 class="box-title text-center"><i class='fa fa-bar-chart text-info'></i> Performance Arus Kas Tahun {{ date("Y") }}</h2>
@@ -91,8 +91,20 @@
             </div>
         </div>
     </div>
-</div>
 
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h2 class="box-title text-center"><i class='fa fa-bar-chart text-info'></i> Performance Piutang {{ date("Y") }}</h2>
+            </div>
+            <div class="box-body">
+                <div class="chart">
+                    <canvas id="v_piutang" style="height: 300px;"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
     
 @endsection
 @section('script')
@@ -100,6 +112,7 @@
     $(document).ready(function(){
         getPbl();
         get_arus_kas();
+        get_v_piutang();
     })
 
     function get_arus_kas(){
@@ -169,6 +182,59 @@
             }
         })
     }
+
+    function get_v_piutang(){
+        $.ajax({
+            type : "GET",
+            dataType: "json",
+            url : "{{ asset('api/piutang') }}",
+            cache: false,
+            success: function(res){
+                var iData = res.data;
+                console.log(iData);
+                const ctx = document.getElementById('v_piutang');
+                const data = {
+                    labels: iData.labels,
+                    datasets: [
+                        {
+                        label: 'Piutang',
+                        data: iData.data,
+                        backgroundColor: "#4bc0c0",
+                        },
+                        
+                    ]
+                };
+
+                const config = {
+                    type: 'bar',
+                    data: data,
+                    options: {
+                        plugins: {
+                        title: {
+                            display: true,
+                            text: 'Piutang'
+                        },
+                        },
+                        responsive: true,
+                        scales: {
+                        x: {
+                            stacked: true,
+                        },
+                        y: {
+                            stacked: true
+                        }
+                        }
+                    }
+                };
+                
+                new Chart(ctx, config);
+            },
+            error: function(er){
+                console.log(er);
+            }
+        })
+    }
+
     function getPbl(){
         $.ajax({
             type : "GET",
