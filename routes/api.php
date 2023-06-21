@@ -8,6 +8,7 @@ use  App\Http\Controllers\Api\BebanController;
 use  App\Http\Controllers\Api\GrafikController;
 use  App\Http\Controllers\Api\GrafikPblController;
 use  App\Http\Controllers\Api\ArusKasController;
+use  App\Http\Controllers\Api\PiutangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,4 +34,5 @@ Route::resources([
 Route::get("/grafik",[GrafikController::class, "index"]);
 Route::post("/grafikpbl",[GrafikPblController::class, "index"]);
 Route::get("/aruskas",[ArusKasController::class, "index"]);
+Route::get("/piutang",[PiutangController::class, "index"]);
 Route::post("/grafikaruskas",[ArusKasController::class, "get_grafik"]);
