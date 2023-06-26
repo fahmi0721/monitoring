@@ -25,3 +25,7 @@ Route::get("grafik-arus-kas/{tahun}",function () {
     return view('pages.grafikaruskas.detail');
 });
 
+Route::get("grafik-piutang/{tahun}/{umur_piutang}",function () {
+    return view('pages.grafikpiutang.detail');
+});
+

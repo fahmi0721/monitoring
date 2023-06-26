@@ -35,4 +35,5 @@ Route::get("/grafik",[GrafikController::class, "index"]);
 Route::post("/grafikpbl",[GrafikPblController::class, "index"]);
 Route::get("/aruskas",[ArusKasController::class, "index"]);
 Route::get("/piutang",[PiutangController::class, "index"]);
+Route::post("/all-piutang",[PiutangController::class, "show_all_grafik"]);
 Route::post("/grafikaruskas",[ArusKasController::class, "get_grafik"]);
