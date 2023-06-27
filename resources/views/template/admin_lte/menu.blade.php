@@ -23,7 +23,7 @@
         <li class="header">KEUANGAN</li>
         <li class="{{ Request::segment(1) == 'grafik-aus-kas' ? 'active' : '' }}"><a href="{{ url('/grafik-pbl/') }}/{{ date('Y') }}"><i class="fa fa-area-chart"></i> <span>Garfik PBL</span></a></li>
         <li><a href="{{ url('/grafik-arus-kas/') }}/{{ date('Y') }}"><i class="fa fa-bar-chart"></i> <span>Garfik Arus Kas</span></a></li>
-        <li ><a href="#"><i class="fa fa-area-chart"></i> <span>Garfik Piutang</span></a></li>
+        <li ><a href="{{ url('/grafik-piutang/') }}/{{ date('Y') }}/{{ base64_encode('1s30') }}"><i class="fa fa-area-chart"></i> <span>Garfik Piutang</span></a></li>
         <li><a href="#"><i class="fa fa-archive"></i> <span>Data PBL</span></a></li>
         <li><a href="#"><i class="fa fa-archive"></i> <span>Data Piutang</span></a></li>
         @if(auth()->check())
