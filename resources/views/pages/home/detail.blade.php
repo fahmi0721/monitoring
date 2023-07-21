@@ -15,12 +15,12 @@
 
 
 @section('konten')
-<div class="row">
+<!-- <div class="row"> -->
     @php
         $icon_arr = array("fa-gg","fa-tag","fa-book");
         $bg = array("bg-red","bg-green","bg-blue");
     @endphp
-    <div class="col-md-4 col-sm-6 col-xs-12">
+    <!-- <div class="col-md-4 col-sm-6 col-xs-12">
         <div class="info-box bg-red">
             <span class="info-box-icon"><i class="fa fa-money"></i></span>
             <div class="info-box-content">
@@ -61,7 +61,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
