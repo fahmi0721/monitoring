@@ -148,6 +148,13 @@
                         borderColor: iData.dataset.color.pengeluaran,
                         backgroundColor: iData.dataset.color.pengeluaran,
                         },
+
+                        {
+                        label: 'Saldo Akhir',
+                        data: iData.dataset.data.saldo_akhir,
+                        borderColor: iData.dataset.color.saldo_akhir,
+                        backgroundColor: iData.dataset.color.saldo_akhir,
+                        },
                         
                     ]
                 };
