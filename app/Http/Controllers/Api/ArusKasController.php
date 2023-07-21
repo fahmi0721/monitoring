@@ -38,6 +38,7 @@ class ArusKasController extends Controller
             $iData['dataset']['color']['penerimaaan'] = $this->rndRGBColorCode();
             $iData['dataset']['color']['pengeluaran'] = $this->rndRGBColorCode();
             $iData['dataset']['color']['saldo_awal'] = $this->rndRGBColorCode();
+            $iData['dataset']['color']['saldo_akhir'] = $this->rndRGBColorCode();
             $datas = DB::table("v_arus_kas")
                     ->where("periode", $vl->periode)
                     ->select("saldo_awal","penerimaan","pengeluaran")
@@ -46,6 +47,7 @@ class ArusKasController extends Controller
                 $iData['dataset']['data']['penerimaan'][] = $vla->penerimaan;
                 $iData['dataset']['data']['pengeluaran'][] = $vla->pengeluaran;
                 $iData['dataset']['data']['saldo_awal'][] = $vla->saldo_awal;
+                $iData['dataset']['data']['saldo_akhir'][] = $vla->saldo_awal + ($vla->penerimaan-$vla->pengeluaran);
             }
         }
         return $iData;
