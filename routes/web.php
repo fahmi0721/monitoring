@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\DB;  
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,6 +19,10 @@ Route::get('/', function () {
 
 Route::get("grafik-pbl/{tahun}",function () {
     return view('pages.grafikpbl.detail');
+});
+Route::get("data-pbl/{tahun}",function () {
+    $data['periodes'] = DB::table("t_data_pbl")->select("id","periode","keterangan")->get();
+    return view('pages.datapbl.detail',$data);
 });
 
 Route::get("grafik-arus-kas/{tahun}",function () {
