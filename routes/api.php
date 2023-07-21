@@ -33,6 +33,8 @@ Route::resources([
 
 Route::get("/grafik",[GrafikController::class, "index"]);
 Route::post("/grafikpbl",[GrafikPblController::class, "index"]);
+Route::post("/datapbl",[GrafikPblController::class, "show"]);
+Route::post("/datapblperiode",[GrafikPblController::class, "periode"]);
 Route::get("/aruskas",[ArusKasController::class, "index"]);
 Route::get("/piutang",[PiutangController::class, "index"]);
 Route::post("/all-piutang",[PiutangController::class, "show_all_grafik"]);

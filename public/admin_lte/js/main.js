@@ -68,6 +68,8 @@ function rupiah(objek) {
 	objek.value = c;
 }
 
+
+
 $.extend( $.fn.dataTable.defaults, {
 		autoWidth: false,
 		responsive: true,
